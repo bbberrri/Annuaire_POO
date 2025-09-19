@@ -49,7 +49,7 @@ class PdoBridge
         return $lesLignes->fetchALL(PDO::FETCH_ASSOC);
     }
 
-    public  function getUnMembre($id){
+    public function getUnMembre($id){
         $sql = "SELECT id,nom,prenom FROM membres WHERE id=$id";
         $lesLignes = PdoBridge::$monPdo->query($sql);
         return $lesLignes->fetchALL(PDO::FETCH_ASSOC);
@@ -64,14 +64,14 @@ class PdoBridge
         return 1 + intval($uneLignes["maxi"]);
     }
 
-    public function updateMembre($id,$nom, $prenom){
+    public function updateMembre($id, $nom, $prenom){
         $sql="UPDATE membres SET nom='$nom', prenom='$prenom' WHERE id=$id";
         $req = PdoBridge::$monPdo->exec($sql);
     }
 
-    public function addUnMembre($nom, $prenom)
+    public function addUnMembre($id, $nom, $prenom)
     {
-        $sql = "INSERT INTO membres (nom, prenom) VALUES ('$nom', '$prenom')";
+        $sql = "INSERT INTO membres (id, nom, prenom) VALUES ('$id', '$nom', '$prenom')";
         $req = PdoBridge::$monPdo->query($sql);
     }
 }

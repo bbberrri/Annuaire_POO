@@ -35,12 +35,21 @@ class Gerer
         $unMembre=$unMembre[0];
         require "views/v_saisiemembre.php";
     }
+
+    public function ajouterModif():void
+    {
+        $id = $_REQUEST['id'];
+        $nouveauNom = $_REQUEST['nom'];
+        $nouveauPrenom = $_REQUEST['prenom'];
+        $this->pdo->updateMembre($id, $nouveauNom, $nouveauPrenom);
+    }
     
     public function ajouter():void
     {
+        $id = $this->pdo->getMaxId();
         $nom = $_POST['nom'];
         $prenom = $_POST['prenom'];
-        $this->pdo->addUnMembre($nom, $prenom);
+        $this->pdo->addUnMembre($id, $nom, $prenom);
     }
 
     public function error():void
